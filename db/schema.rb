@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009143933) do
+ActiveRecord::Schema.define(version: 20220504111622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,28 @@ ActiveRecord::Schema.define(version: 20171009143933) do
     t.index ["user_id"], name: "index_in_patients_on_user_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "street_name"
+    t.string "country_iso2", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "formatted_address"
+    t.string "postal_code"
+    t.string "street_number"
+    t.string "street_type"
+    t.string "city_name"
+    t.string "locationable_type", null: false
+    t.uuid "locationable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_name"], name: "index_locations_on_city_name"
+    t.index ["country_iso2"], name: "index_locations_on_country_iso2"
+    t.index ["latitude"], name: "index_locations_on_latitude"
+    t.index ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id"
+    t.index ["longitude"], name: "index_locations_on_longitude"
+    t.index ["postal_code"], name: "index_locations_on_postal_code"
+  end
+
   create_table "medicine_intake_logs", force: :cascade do |t|
     t.bigint "prescribed_medicine_id"
     t.bigint "user_id"
@@ -87,6 +109,14 @@ ActiveRecord::Schema.define(version: 20171009143933) do
     t.boolean "infant_safe"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "nursing_homes", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_nursing_homes_on_location_id"
   end
 
   create_table "prescribed_medicines", force: :cascade do |t|
@@ -135,12 +165,34 @@ ActiveRecord::Schema.define(version: 20171009143933) do
     t.string "first_name"
     t.string "last_name"
     t.string "city"
-    t.string "username"
-    t.string "password"
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "gcmid"
+    t.string "middle_name"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.bigint "location_id"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "doctor_notifications", "doctors"

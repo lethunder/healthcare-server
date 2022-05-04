@@ -12,7 +12,7 @@
         <% if !@user && !@doctor %>
         <h2 class="content-subhead">Get Access</h2>
         <p>
-            You can login as User by <%= link_to "Clicking Here", {:controller => :users, :action => :login}, { class: 'pure-button  button-secondary'} %>.
+            You can login as User by <%= link_to "Clicking Here", new_user_session_path, { class: 'pure-button  button-secondary'} %>.
             <br/>
             <br/>
             You can login as Doctor by <%= link_to "Clicking Here", {:controller => :doctors, :action => :login}, { class: 'pure-button  button-secondary'} %>.

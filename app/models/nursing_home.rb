@@ -1,0 +1,2 @@
+class NursingHome < ApplicationRecord
+end
