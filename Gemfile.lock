@@ -61,6 +61,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.1.5)
     crass (1.0.5)
     domain_name (0.5.20190701)
@@ -91,6 +92,8 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.11.3)
     netrc (0.11.0)
+    next_rails (1.0.5)
+      colorize (>= 0.8.1)
     nio4r (2.5.8)
     nokogiri (1.13.3)
       mini_portile2 (~> 2.8.0)
@@ -190,6 +193,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   groupdate (>= 3.2.0)
   jbuilder (~> 2.5)
+  next_rails
   pg (>= 0.18)
   puma (~> 4.3)
   rails (~> 5.1.4)
@@ -203,7 +207,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.3.7p456
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.0.2
+   2.3.12
